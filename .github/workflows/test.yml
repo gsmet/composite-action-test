@@ -21,10 +21,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run action
-        id: test
+        id: run_action
         uses: gsmet/composite-action@main
       - name: Display output
         run: |
-          echo "${{steps.test.outputs.output1}}"
-          echo "${{steps.test.outputs.output2}}"
-          echo "${{join(steps.test.outputs.*, '\n')}}"
+          echo "${{ steps.run_action.outputs.output1 }}"
+          echo "${{ steps.run_action.outputs.output2 }}"
+          echo "${{ join(steps.run_action.outputs.*, '\n') }}"

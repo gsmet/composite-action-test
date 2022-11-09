@@ -1,0 +1,30 @@
+name: Test
+
+on:
+  push:
+    branches: ['main']
+  workflow_dispatch:
+  issues:
+    types: [opened, edited, milestoned]
+
+jobs:
+  run-image:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest,windows-latest,macos-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run action
+        id: test
+        uses: gsmet/composite-action
+      - name: Display output
+        run: |
+          echo "${{steps.test.outputs.output1}}"
+          echo "${{steps.test.outputs.output2}}"
+          echo "${{join(steps.test.outputs.*, '\n')}}"

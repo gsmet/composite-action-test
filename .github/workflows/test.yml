@@ -22,7 +22,7 @@ jobs:
 
       - name: Run action
         id: test
-        uses: gsmet/composite-action
+        uses: gsmet/composite-action@main
       - name: Display output
         run: |
           echo "${{steps.test.outputs.output1}}"
